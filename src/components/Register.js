@@ -19,12 +19,11 @@ const Register = () => {
 
   const initialValues = {
     username: '',
-    email: '',
     password: '',
     firstname: '',
     lastname: '',
-    initals: '',
-    rate: 0,
+    initials: '',
+    rate: 150,
     active: true,
   };
 
@@ -36,9 +35,6 @@ const Register = () => {
         (val) =>
           val && val.toString().length >= 3 && val.toString().length <= 20
       )
-      .required('This field is required!'),
-    email: Yup.string()
-      .email('This is not a valid email.')
       .required('This field is required!'),
     password: Yup.string()
       .test(
@@ -55,23 +51,13 @@ const Register = () => {
   });
 
   const handleRegister = (formValue) => {
-    const {
-      username,
-      email,
-      password,
-      firstname,
-      lastname,
-      initials,
-      rate,
-      active,
-    } = formValue;
-
+    const { username, password, firstname, lastname, initials, rate, active } =
+      formValue;
     setSuccessful(false);
 
     dispatch(
       register({
         username,
-        email,
         password,
         firstname,
         lastname,
@@ -108,16 +94,6 @@ const Register = () => {
                   <Field name='username' type='text' className='form-control' />
                   <ErrorMessage
                     name='username'
-                    component='div'
-                    className='alert alert-danger'
-                  />
-                </div>
-
-                <div className='form-group'>
-                  <label htmlFor='email'>Email</label>
-                  <Field name='email' type='email' className='form-control' />
-                  <ErrorMessage
-                    name='email'
                     component='div'
                     className='alert alert-danger'
                   />

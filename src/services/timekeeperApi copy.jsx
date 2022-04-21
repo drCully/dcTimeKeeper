@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const timekeeperApi = createApi({
   reducerPath: 'timekeeperApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
+    baseUrl: 'http://localhost:8080/api/',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.user.accessToken;
       if (token) {

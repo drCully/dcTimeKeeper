@@ -113,10 +113,10 @@ const Users = () => {
                   </td>
                   <td>
                     <Link to={`/useredit/${item._id}`}>
-                      <FaRegEdit className='text-success fs-5 me-4' />
+                      <FaRegEdit className='text-success fs-6 me-4' />
                     </Link>
                     <FaRegTrashAlt
-                      className='text-danger fs-5 me-4'
+                      className='text-danger fs-6 me-4'
                       style={{ cursor: 'pointer' }}
                       onClick={() => handleDelete(item._id)}
                     />

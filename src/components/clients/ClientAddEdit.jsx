@@ -14,7 +14,7 @@ const initialState = {
   addr3: '',
   contact: '',
   email: '',
-  active: '',
+  active: true,
 };
 
 const ClientAddEdit = () => {

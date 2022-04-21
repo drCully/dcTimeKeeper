@@ -17,7 +17,7 @@ const initialState = {
   lastname: '',
   initials: '',
   password: '',
-  rate: 0,
+  rate: 150,
   roles: [],
   active: true,
 };
@@ -40,6 +40,7 @@ const UserAddEdit = () => {
     roles,
     active,
   } = formValue;
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -106,7 +107,7 @@ const UserAddEdit = () => {
     <div className='col-md-7 m-auto'>
       <h4>{editMode ? 'Edit User' : 'Add New User'}</h4>
       <form className='row g-3 ms-3' onSubmit={handleSubmit}>
-        <div className='col-md-5'>
+        <div className='col-md-4'>
           <label htmlFor='username'>User Name</label>
           <input
             type='text'
@@ -117,12 +118,12 @@ const UserAddEdit = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div className='col-md-4'>
+        <div className='col-md-5'>
           <label htmlFor='password'>Password</label>
           <input
             type='text'
             className='form-control'
-            id='password'
+            id='passwordInput'
             name='password'
             value={password}
             onChange={handleInputChange}

@@ -20,6 +20,7 @@ import ClientInfo from './components/clients/ClientInfo';
 import Users from './components/users/Users';
 import UserAddEdit from './components/users/UserAddEdit';
 import UserInfo from './components/users/UserInfo';
+import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
@@ -161,7 +162,7 @@ const App = () => {
                 </div>
               ) : (
                 <div className='navbar-nav ms-auto'>
-                  {/*                   <li className='nav-item'>
+                  <li className='nav-item'>
                     <Link
                       to={'/login'}
                       className='btn btn-outline-secondary btn-sm mt-2'
@@ -170,8 +171,7 @@ const App = () => {
                       Log In
                     </Link>
                   </li>
-
-                  <li className='nav-item'>
+                  {/* <li className='nav-item'>
                     <Link
                       to={'/register'}
                       className='btn btn-outline-secondary btn-sm ms-2 mt-2'
@@ -191,7 +191,7 @@ const App = () => {
           <div className='card p-2 mb-5 border-1'>
             <div className='card-body'>
               <Routes>
-                <Route path='/' element={<Time />} />
+                <Route path='/' element={<Home />} />
                 <Route path='/time' element={<Time />} />
                 <Route path='/timeadd' element={<TimeAddEdit />} />
                 <Route path='/timeedit/:id' element={<TimeAddEdit />} />
