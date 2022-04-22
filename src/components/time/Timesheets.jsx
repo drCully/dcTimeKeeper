@@ -86,39 +86,44 @@ const Timesheet = () => {
   return (
     <div>
       <div className='col-md-12 m-auto'>
-        <div className='d-flex'>
-          <div className='col-md-2 text-nowrap me-auto'>
+        <div className=''>
+          <div className='col text-nowrap'>
             <h4>Timesheet</h4>
           </div>
-          <FaChevronCircleLeft
-            type='button'
-            className='text-secondary fs-3 my-auto m-2'
-            onClick={handleDatePrevious}
-          />
-          <div className='col-md-2'>
-            <div className='mb-2'>
-              <input
-                type='date'
-                className='form-control'
-                id='timesheetdate'
-                name='timesheetdate'
-                value={timesheetdate}
-                onChange={handleDateChange}
-              />
+          <div className='d-flex justify-content-end'>
+            <FaChevronCircleLeft
+              type='button'
+              className='text-secondary fs-3 my-auto m-2'
+              onClick={handleDatePrevious}
+            />
+            <div className='col-md-2'>
+              <div className='mb-2'>
+                <input
+                  type='date'
+                  className='form-control'
+                  id='timesheetdate'
+                  name='timesheetdate'
+                  value={timesheetdate}
+                  onChange={handleDateChange}
+                />
+              </div>
             </div>
+            <FaChevronCircleRight
+              type='button'
+              className='text-secondary fs-3 my-auto m-2'
+              onClick={handleDateNext}
+            />
+            <Link
+              to={'/timeadd'}
+              className='btn btn-primary btn-sm text-nowrap my-auto m-3'
+            >
+              Add Time
+            </Link>
+            <FaFileAlt
+              type='button'
+              className='text-success fs-4 my-auto m-2'
+            />
           </div>
-          <FaChevronCircleRight
-            type='button'
-            className='text-secondary fs-3 my-auto m-2'
-            onClick={handleDateNext}
-          />
-          <Link
-            to={'/timeadd'}
-            className='btn btn-primary btn-sm text-nowrap my-auto m-3'
-          >
-            Add Time
-          </Link>
-          <FaFileAlt type='button' className='text-success fs-4 my-auto m-2' />
         </div>
 
         {timeRecords.totalItems > 0 ? (
