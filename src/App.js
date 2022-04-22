@@ -13,7 +13,7 @@ import { FaUserCircle } from 'react-icons/fa';
 
 import Time from './components/time/Timesheets';
 import TimeAddEdit from './components/time/TimeAddEdit';
-import Billing from './components/Home';
+import Billing from './components/billing/Billing';
 import Clients from './components/clients/Clients';
 import ClientAddEdit from './components/clients/ClientAddEdit';
 import ClientInfo from './components/clients/ClientInfo';

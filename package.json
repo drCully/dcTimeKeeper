@@ -32,9 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "localdata": "env-cmd -f .env.local npm run-script start",
-    "webdata": "env-cmd -f .env.web npm run-script start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
