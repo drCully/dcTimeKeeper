@@ -12,8 +12,12 @@ export const timekeeperApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Client', 'User', 'Time'],
+  tagTypes: ['Client', 'Task', 'Time', 'User'],
   endpoints: (builder) => ({
+    clientLookup: builder.query({
+      query: () => `/clients/lookup`,
+      providesTags: ['Client'],
+    }),
     clients: builder.query({
       query: (arg) => `/clients?${arg}`,
       providesTags: ['Client'],
@@ -44,6 +48,41 @@ export const timekeeperApi = createApi({
         body: rest,
       }),
       invalidatesTags: ['Client'],
+    }),
+    taskLookup: builder.query({
+      query: () => `/tasks/lookup`,
+      providesTags: ['Task'],
+    }),
+    tasks: builder.query({
+      query: (arg) => `/tasks?${arg}`,
+      providesTags: ['Task'],
+    }),
+    task: builder.query({
+      query: (_id) => `/tasks/${_id}`,
+      providesTags: ['Task'],
+    }),
+    addTask: builder.mutation({
+      query: (task) => ({
+        url: '/tasks',
+        method: 'POST',
+        body: task,
+      }),
+      invalidatesTags: ['Task'],
+    }),
+    deleteTask: builder.mutation({
+      query: (_id) => ({
+        url: `/tasks/${_id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Task'],
+    }),
+    updateTask: builder.mutation({
+      query: ({ _id, ...rest }) => ({
+        url: `/tasks/${_id}`,
+        method: 'PUT',
+        body: rest,
+      }),
+      invalidatesTags: ['Task'],
     }),
     times: builder.query({
       query: (arg) => `/time?${arg}`,
@@ -116,9 +155,17 @@ export const timekeeperApi = createApi({
 export const {
   useClientsQuery,
   useClientQuery,
+  useClientLookupQuery,
   useAddClientMutation,
   useDeleteClientMutation,
   useUpdateClientMutation,
+  useRolesQuery,
+  useTasksQuery,
+  useTaskQuery,
+  useTaskLookupQuery,
+  useAddTaskMutation,
+  useDeleteTaskMutation,
+  useUpdateTaskMutation,
   useTimesQuery,
   useTimeQuery,
   useAddTimeMutation,
@@ -129,5 +176,4 @@ export const {
   useAddUserMutation,
   useDeleteUserMutation,
   useUpdateUserMutation,
-  useRolesQuery,
 } = timekeeperApi;

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setTimesheetDate,
-  previousDate,
-  nextDate,
-} from '../../redux/slices/session';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { subDays, addDays, format, parseISO } from 'date-fns';
 import {
   FaFileAlt,
   FaChevronCircleLeft,
@@ -22,9 +18,10 @@ import {
 
 const Timesheet = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const [timesheetdate, setTimesheetdate] = useState(
+    format(new Date(), 'yyyy-MM-dd')
+  );
   const timekeeper = currentUser.id;
-  const { timesheetDate } = useSelector((state) => state.session);
-  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(15);
   const pageSizes = [10, 15, 20];
@@ -36,7 +33,7 @@ const Timesheet = () => {
   } = useTimesQuery(
     `page=${
       page - 1
-    }&size=${perPage}&date=${timesheetDate}&timekeeper=${timekeeper}`
+    }&size=${perPage}&date=${timesheetdate}&timekeeper=${timekeeper}`
   );
 
   const [deleteTime] = useDeleteTimeMutation();
@@ -51,20 +48,35 @@ const Timesheet = () => {
     return <h3>Loading...</h3>;
   }
 
-  const handleDateChange = (e) => {
-    dispatch(setTimesheetDate(e.target.value));
+  if (!timeRecords.data) {
+    console.log(timeRecords);
+  }
+
+  const handleDateChange = (event) => {
+    //setTimesheetdate(event.target.value);
   };
 
-  const handlePageChange = (e) => {
-    setPage(e.target.value);
+  const handleDatePrevious = () => {
+    let newdate = format(subDays(parseISO(timesheetdate), 1), 'yyyy-MM-dd');
+    //setTimesheetdate(newdate);
   };
 
-  const handlePageSizeChange = (e) => {
-    setPerPage(e.target.value);
+  const handleDateNext = () => {
+    let newdate = format(addDays(parseISO(timesheetdate), 1), 'yyyy-MM-dd');
+    //setTimesheetdate(newdate);
+  };
+
+  const handlePageChange = (event) => {
+    setPage(event.target.value);
+  };
+
+  const handlePageSizeChange = (event) => {
+    setPerPage(event.target.value);
     setPage(1);
   };
 
   const handleDelete = async (id) => {
+    console.log(id);
     if (window.confirm('Are you sure you want to delete this time record? ')) {
       await deleteTime(id);
       toast.success('Time Record Deleted Successfully');
@@ -82,16 +94,16 @@ const Timesheet = () => {
             <FaChevronCircleLeft
               type='button'
               className='text-secondary fs-3 my-auto m-2'
-              onClick={() => dispatch(previousDate())}
+              onClick={handleDatePrevious}
             />
             <div className='col-md-2'>
               <div className='mb-2'>
                 <input
                   type='date'
                   className='form-control'
-                  id='timesheetDate'
-                  name='timesheetDate'
-                  value={timesheetDate}
+                  id='timesheetdate'
+                  name='timesheetdate'
+                  value={timesheetdate}
                   onChange={handleDateChange}
                 />
               </div>
@@ -99,7 +111,7 @@ const Timesheet = () => {
             <FaChevronCircleRight
               type='button'
               className='text-secondary fs-3 my-auto m-2'
-              onClick={() => dispatch(nextDate())}
+              onClick={handleDateNext}
             />
             <Link
               to={'/timeadd'}
@@ -120,7 +132,6 @@ const Timesheet = () => {
               <thead>
                 <tr>
                   <th>Client</th>
-                  <th>Task</th>
                   <th>Hours</th>
                   <th>Description</th>
                   <th>Action</th>
@@ -131,7 +142,6 @@ const Timesheet = () => {
                   return (
                     <tr key={item._id}>
                       <td>{item.client.clientname}</td>
-                      <td>{item.task.taskname}</td>
                       <td>{item.hours}</td>
                       <td>{item.description}</td>
                       <td>

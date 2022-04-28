@@ -60,7 +60,6 @@ const ClientAddEdit = () => {
       toast.error('Please provide value into each input field');
     } else {
       if (!editMode) {
-        console.log(formValue);
         await addClient(formValue);
         navigate('/clients');
         toast.success('Client Added Successfully');

@@ -5,8 +5,8 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaUserCircle } from 'react-icons/fa';
 
-import { login } from '../slices/auth';
-import { clearMessage } from '../slices/message';
+import { login } from '../redux/slices/auth';
+import { clearMessage } from '../redux/slices/message';
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false);

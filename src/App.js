@@ -20,12 +20,14 @@ import ClientInfo from './components/clients/ClientInfo';
 import Users from './components/users/Users';
 import UserAddEdit from './components/users/UserAddEdit';
 import UserInfo from './components/users/UserInfo';
+import Tasks from './components/tasks/Tasks';
+import TaskAddEdit from './components/tasks/TaskAddEdit';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
 
-import { logout } from './slices/auth';
+import { logout } from './redux/slices/auth';
 
 import EventBus from './common/EventBus';
 
@@ -106,6 +108,11 @@ const App = () => {
                     <li className='nav-item'>
                       <NavLink to={'/clients'} className='nav-link'>
                         Clients
+                      </NavLink>
+                    </li>
+                    <li className='nav-item'>
+                      <NavLink to={'/tasks'} className='nav-link'>
+                        Tasks
                       </NavLink>
                     </li>
                     <li className='nav-item'>
@@ -204,6 +211,9 @@ const App = () => {
                 <Route path='/useradd' element={<UserAddEdit />} />
                 <Route path='/useredit/:id' element={<UserAddEdit />} />
                 <Route path='/userinfo/:id' element={<UserInfo />} />
+                <Route path='/tasks' element={<Tasks />} />
+                <Route path='/taskadd' element={<TaskAddEdit />} />
+                <Route path='/taskedit/:id' element={<TaskAddEdit />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route exact path='/profile' element={<Profile />} />

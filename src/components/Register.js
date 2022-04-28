@@ -4,8 +4,8 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaUserCircle } from 'react-icons/fa';
 
-import { register } from '../slices/auth';
-import { clearMessage } from '../slices/message';
+import { register } from '../redux/slices/auth';
+import { clearMessage } from '../redux/slices/message';
 
 const Register = () => {
   const [successful, setSuccessful] = useState(false);

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLastClient, setLastTask } from '../../redux/slices/session';
-import { format, parseISO } from 'date-fns';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { format, parseISO } from 'date-fns';
 import {
   useClientLookupQuery,
   useTaskLookupQuery,
@@ -14,16 +13,12 @@ import {
 
 const TimeAddEdit = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
-  const { timesheetDate, lastClient, lastTask } = useSelector(
-    (state) => state.session
-  );
-  const dispatch = useDispatch();
 
   const initialState = {
-    date: timesheetDate,
+    date: format(new Date(), 'yyyy-MM-dd'),
     timekeeper: currentUser.id,
-    client: lastClient,
-    task: lastTask,
+    client: '',
+    task: '',
     hours: 0.5,
     rate: currentUser.rate,
     description: '',
@@ -88,8 +83,6 @@ const TimeAddEdit = () => {
     } else {
       if (!editMode) {
         await addTime(formValue);
-        dispatch(setLastClient(formValue.client));
-        dispatch(setLastTask(formValue.task));
         navigate('/time');
         toast.success('Time record Added Successfully');
       } else {
@@ -118,7 +111,7 @@ const TimeAddEdit = () => {
             className='form-control'
             id='date'
             name='date'
-            value={format(parseISO(date), 'yyyy-MM-dd')}
+            value={date}
             onChange={handleInputChange}
           />
         </div>
